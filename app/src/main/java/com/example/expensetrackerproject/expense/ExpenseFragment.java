@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.expensetrackerproject.OnFragmentInteractionListener;
 import com.example.expensetrackerproject.R;
-import com.example.expensetrackerproject.graphing.GraphingActivity;
+import com.example.expensetrackerproject.graphing.GraphingFragment;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -231,7 +231,7 @@ public class ExpenseFragment extends Fragment
 
     public void onGraphingButtonClick(View view)
     {
-        Intent intent = new Intent(this.getActivity(), GraphingActivity.class);
+        Intent intent = new Intent(this.getActivity(), GraphingFragment.class);
         intent.putExtra("USERNAME", username);
         intent.putExtra("MONTH", 4);
         intent.putExtra("YEAR", 2019);

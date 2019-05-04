@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.expensetrackerproject.expense.ExpenseFragment;
-import com.example.expensetrackerproject.graphing.GraphingActivity;
+import com.example.expensetrackerproject.graphing.GraphingFragment;
 import com.example.expensetrackerproject.login.LoginActivity;
 
 import java.util.Objects;
@@ -116,7 +116,7 @@ public class NavigationActivity extends AppCompatActivity
                 newFragment = new ExpenseFragment();
                 break;
             case R.id.nav_graphing:
-                newFragment = new GraphingActivity();
+                newFragment = new GraphingFragment();
                 break;
             case R.id.nav_share:
                 newFragment = new Share();

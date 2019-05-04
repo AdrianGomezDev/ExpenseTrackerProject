@@ -3,18 +3,16 @@ package com.example.expensetrackerproject.graphing;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.expensetrackerproject.OnFragmentInteractionListener;
 import com.example.expensetrackerproject.R;
-import com.example.expensetrackerproject.graphing.GraphingActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 
-public class GraphingActivity extends Fragment
+public class GraphingFragment extends Fragment
 {
     private GraphingController controller;
     private String username;
@@ -29,10 +27,10 @@ public class GraphingActivity extends Fragment
     private String mParam2;
     private OnFragmentInteractionListener mListener;
 
-    public GraphingActivity(){}
+    public GraphingFragment(){}
 
-    public static GraphingActivity newInstance(String param1, String param2) {
-        GraphingActivity fragment = new GraphingActivity();
+    public static GraphingFragment newInstance(String param1, String param2) {
+        GraphingFragment fragment = new GraphingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
