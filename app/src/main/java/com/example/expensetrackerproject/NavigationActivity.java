@@ -17,6 +17,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.expensetrackerproject.expense.ExpenseActivity;
+import com.example.expensetrackerproject.graphing.GraphingActivity;
+import com.example.expensetrackerproject.login.LoginActivity;
+
 import java.util.Objects;
 
 
@@ -48,8 +52,8 @@ public class NavigationActivity extends AppCompatActivity
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // need to do something with the sign out button
-                /*startActivity(new Intent(NavigationActivity.this, LoginActivity.class));*/
+
+                startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
             }
         });
 
@@ -109,8 +113,11 @@ public class NavigationActivity extends AppCompatActivity
             case R.id.nav_home:
                 newFragment = new Home();
                 break;
-            case R.id.nav_analytics:
-                newFragment = new Analytics();
+            case R.id.nav_expense:
+                newFragment = new ExpenseActivity();
+                break;
+            case R.id.nav_graphing:
+                newFragment = new GraphingActivity();
                 break;
             case R.id.nav_share:
                 newFragment = new Share();

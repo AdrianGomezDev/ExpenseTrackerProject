@@ -30,4 +30,6 @@
     <string name="btn_cancel">Cancel</string>
     <string name="btn_save">Save</string>
     <string name="btn_return2login">Return to Login</string>
+    <string name="expense">Expense</string>
+    <string name="expenses">Expenses</string>
 </resources>

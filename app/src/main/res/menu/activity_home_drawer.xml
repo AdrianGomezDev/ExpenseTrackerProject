@@ -10,7 +10,11 @@
             android:icon="@drawable/ic_menu_home"
             android:title="@string/home" />
         <item
-            android:id="@+id/nav_analytics"
+            android:id="@+id/nav_expense"
+            android:icon="@drawable/ic_menu_expense"
+            android:title="@string/expenses" />
+        <item
+            android:id="@+id/nav_graphing"
             android:icon="@drawable/ic_menu_trending"
             android:title="@string/analytics" />
     </group>

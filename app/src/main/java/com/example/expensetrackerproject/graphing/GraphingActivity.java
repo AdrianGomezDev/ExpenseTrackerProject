@@ -1,13 +1,20 @@
 package com.example.expensetrackerproject.graphing;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.example.expensetrackerproject.OnFragmentInteractionListener;
 import com.example.expensetrackerproject.R;
+import com.example.expensetrackerproject.graphing.GraphingActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 
-public class GraphingActivity extends AppCompatActivity
+public class GraphingActivity extends Fragment
 {
     private GraphingController controller;
     private String username;
@@ -16,21 +23,71 @@ public class GraphingActivity extends AppCompatActivity
 
     private BarChart barChart;
 
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    private String mParam1;
+    private String mParam2;
+    private OnFragmentInteractionListener mListener;
+
+    public GraphingActivity(){}
+
+    public static GraphingActivity newInstance(String param1, String param2) {
+        GraphingActivity fragment = new GraphingActivity();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_graphing_actvity);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
 
-        controller = new GraphingController(this);
-        username = getIntent().getStringExtra("USERNAME");
-        month = getIntent().getIntExtra("MONTH", 0);
-        year = getIntent().getIntExtra("YEAR", 0);
 
-        barChart = findViewById(R.id.barchart);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        getActivity().setTitle("Expenses");
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_expense, container, false);
+
+
+        controller = new GraphingController(this.getActivity());
+        username = getActivity().getIntent().getStringExtra("USERNAME");
+        month = getActivity().getIntent().getIntExtra("MONTH", 0);
+        year = getActivity().getIntent().getIntExtra("YEAR", 0);
+
+        barChart = view.findViewById(R.id.barchart);
 
         displayExpenses();
 //        displayIncomeVsExpenses();
+
+        return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     public void displayExpenses()
