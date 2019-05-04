@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,7 @@ import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class ExpenseFragment extends Fragment
+public class ExpenseFragment extends Fragment implements View.OnClickListener
 {
     private ExpenseController controller;
 
@@ -34,6 +35,10 @@ public class ExpenseFragment extends Fragment
     private TextView allowance;
     private TextView expenses;
     private TextView balance;
+
+    private Button btnExpense;
+    private Button btnDeposit;
+    private Button btnWithdraw;
 
     private EditText input;
 
@@ -135,6 +140,12 @@ public class ExpenseFragment extends Fragment
 
         input = view.findViewById(R.id.input);
 
+        btnExpense = view.findViewById(R.id.expense);
+        btnExpense.setOnClickListener(this);
+        btnDeposit = view.findViewById(R.id.deposit);
+        btnDeposit.setOnClickListener(this);
+        btnWithdraw = view.findViewById(R.id.withdraw);
+        btnWithdraw.setOnClickListener(this);
 
         return view;
     }
@@ -187,54 +198,52 @@ public class ExpenseFragment extends Fragment
         balance.setText(displayAmount);
     }
 
-    public void onExpenseButtonClick(View view)
+    @Override
+    public void onClick(View v)
     {
-        String text = input.getText().toString();
-        if(!text.isEmpty()) {
-            double amount = Double.parseDouble(text);
-            controller.insertTransaction(username, "expense", amount);
-
-            displayExpenses();
-            displayBalance();
-
-        }
-    }
-
-    public void onDepositButtonClick(View view)
-    {
-        String text = input.getText().toString();
-        if(!text.isEmpty()) {
-            double amount = Double.parseDouble(text);
-            controller.insertTransaction(username, "savings", amount);
-
-            displaySavings();
-        }
-
-    }
-
-    public void onWithdrawButtonClick(View view)
-    {
-        String text = input.getText().toString();
-        if(!text.isEmpty())
+        switch(v.getId())
         {
-            double amount = Double.parseDouble(text);
-            if(amount <= controller.getSavings(username)) {
-                controller.insertTransaction(username, "withdrawal", amount);
-                displaySavings();
+            case R.id.expense: {
+                String text = input.getText().toString();
+                if (!text.isEmpty())
+                {
+                    double amount = Double.parseDouble(text);
+                    controller.insertTransaction(username, "expense", amount);
+
+                    displayExpenses();
+                    displayBalance();
+
+                }
+                break;
             }
-            else
-                Toast.makeText(this.getActivity(), "Withdrawal amount exceeds Savings", Toast.LENGTH_LONG).show();
+
+            case R.id.deposit: {
+                String text = input.getText().toString();
+                if (!text.isEmpty())
+                {
+                    double amount = Double.parseDouble(text);
+                    controller.insertTransaction(username, "savings", amount);
+
+                    displaySavings();
+                }
+                break;
+            }
+
+            case R.id.withdraw:{
+                String text = input.getText().toString();
+                if(!text.isEmpty())
+                {
+                    double amount = Double.parseDouble(text);
+                    if(amount <= controller.getSavings(username)) {
+                        controller.insertTransaction(username, "withdrawal", amount);
+                        displaySavings();
+                    }
+                    else
+                        Toast.makeText(this.getActivity(), "Withdrawal amount exceeds Savings", Toast.LENGTH_LONG).show();
+
+                }
+            }
 
         }
-
-    }
-
-    public void onGraphingButtonClick(View view)
-    {
-        Intent intent = new Intent(this.getActivity(), GraphingFragment.class);
-        intent.putExtra("USERNAME", username);
-        intent.putExtra("MONTH", 4);
-        intent.putExtra("YEAR", 2019);
-        startActivity(intent);
     }
 }

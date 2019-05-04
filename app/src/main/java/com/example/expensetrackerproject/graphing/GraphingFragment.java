@@ -55,7 +55,7 @@ public class GraphingFragment extends Fragment
                              Bundle savedInstanceState) {
         getActivity().setTitle("Expenses");
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_expense, container, false);
+        View view = inflater.inflate(R.layout.fragment_graphing, container, false);
 
 
         controller = new GraphingController(this.getActivity());
