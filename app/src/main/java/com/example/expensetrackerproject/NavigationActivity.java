@@ -116,7 +116,7 @@ public class NavigationActivity extends AppCompatActivity
                 newFragment = new ExpenseFragment();
                 break;
             case R.id.nav_graphing:
-                newFragment = new GraphingFragment();
+                newFragment = GraphingFragment.newInstance("", 5, 2019);
                 break;
             case R.id.nav_share:
                 newFragment = new Share();

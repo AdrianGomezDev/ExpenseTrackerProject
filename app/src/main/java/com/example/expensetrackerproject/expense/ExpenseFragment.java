@@ -84,7 +84,7 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
         controller = new ExpenseController(this.getActivity());
 
         username = getActivity().getIntent().getStringExtra("USERNAME");
-
+        System.out.println("***********************USERNAME = " + username);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String todaysDate = dateFormat.format(date);

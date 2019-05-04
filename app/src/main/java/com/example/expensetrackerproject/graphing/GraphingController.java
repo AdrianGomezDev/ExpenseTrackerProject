@@ -12,6 +12,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.TransformerConfigurationException;
+
 public class GraphingController
 {
     private DBHelper db;

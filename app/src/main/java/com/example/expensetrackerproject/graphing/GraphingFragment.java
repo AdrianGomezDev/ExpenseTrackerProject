@@ -21,19 +21,20 @@ public class GraphingFragment extends Fragment
 
     private BarChart barChart;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
+    private static final String ARG_PARAM1 = "username";
+    private static final String ARG_PARAM2 = "month";
+    private static final String ARG_PARAM3 = "year";
+
     private OnFragmentInteractionListener mListener;
 
     public GraphingFragment(){}
 
-    public static GraphingFragment newInstance(String param1, String param2) {
+    public static GraphingFragment newInstance(String username, int month, int year) {
         GraphingFragment fragment = new GraphingFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, username);
+        args.putInt(ARG_PARAM2, month);
+        args.putInt(ARG_PARAM3, year);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,8 +44,10 @@ public class GraphingFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+//            username = getActivity().getIntent().getStringExtra("USERNAME");
+//            username = getArguments().getString(ARG_PARAM1);
+            month = getArguments().getInt(ARG_PARAM2);
+            year = getArguments().getInt(ARG_PARAM3);
         }
 
 
@@ -60,8 +63,8 @@ public class GraphingFragment extends Fragment
 
         controller = new GraphingController(this.getActivity());
         username = getActivity().getIntent().getStringExtra("USERNAME");
-        month = getActivity().getIntent().getIntExtra("MONTH", 0);
-        year = getActivity().getIntent().getIntExtra("YEAR", 0);
+//        month = getActivity().getIntent().getIntExtra("MONTH", 0);
+//        year = getActivity().getIntent().getIntExtra("YEAR", 0);
 
         barChart = view.findViewById(R.id.barchart);
 
