@@ -134,6 +134,6 @@ public class NavigationActivity extends AppCompatActivity
     @Override
     public void onFragmentMessage(String TAG, Object data) {
         //TODO: Handles fragment messages
-        
+
     }
 }
