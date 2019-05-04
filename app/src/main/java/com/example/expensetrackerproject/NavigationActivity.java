@@ -15,9 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.example.expensetrackerproject.expense.ExpenseActivity;
+import com.example.expensetrackerproject.expense.ExpenseFragment;
 import com.example.expensetrackerproject.graphing.GraphingActivity;
 import com.example.expensetrackerproject.login.LoginActivity;
 
@@ -114,7 +113,7 @@ public class NavigationActivity extends AppCompatActivity
                 newFragment = new Home();
                 break;
             case R.id.nav_expense:
-                newFragment = new ExpenseActivity();
+                newFragment = new ExpenseFragment();
                 break;
             case R.id.nav_graphing:
                 newFragment = new GraphingActivity();

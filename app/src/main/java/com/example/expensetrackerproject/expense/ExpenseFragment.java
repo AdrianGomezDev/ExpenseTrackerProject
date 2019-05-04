@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class ExpenseActivity extends Fragment
+public class ExpenseFragment extends Fragment
 {
     private ExpenseController controller;
 
@@ -49,10 +48,10 @@ public class ExpenseActivity extends Fragment
     private String mParam2;
     private OnFragmentInteractionListener mListener;
 
-    public ExpenseActivity(){}
+    public ExpenseFragment(){}
 
-    public static ExpenseActivity newInstance(String param1, String param2) {
-        ExpenseActivity fragment = new ExpenseActivity();
+    public static ExpenseFragment newInstance(String param1, String param2) {
+        ExpenseFragment fragment = new ExpenseFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

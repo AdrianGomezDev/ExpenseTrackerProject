@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.example.expensetrackerproject.NavigationActivity;
 import com.example.expensetrackerproject.R;
-import com.example.expensetrackerproject.expense.ExpenseActivity;
 
 public class LoginActivity extends AppCompatActivity
 {
