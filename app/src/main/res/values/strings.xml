@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Expense Tracker</string>
     <string name="nav_header_desc">User Profile Picture</string>
     <string name="nav_header_title">Username</string>
@@ -13,4 +14,20 @@
     <string name="share">Share</string>
     <string name="title_activity_home">Expense Tracker</string>
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="passwordRetype">Retype Password</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="email">Email</string>
+    <string name="age">Age</string>
+    <string name="income">Monthly Income</string>
+    <string name="savings">Savings</string>
+
+    <!--buttons  -->
+    <string name="btn_login">Login</string>
+    <string name="btn_newUser">New User</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_return2login">Return to Login</string>
 </resources>

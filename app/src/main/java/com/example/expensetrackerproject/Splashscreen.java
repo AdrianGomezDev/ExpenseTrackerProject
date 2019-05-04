@@ -10,6 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.expensetrackerproject.login.LoginActivity;
+
 public class Splashscreen extends Activity {
 
 
@@ -52,8 +54,8 @@ public class Splashscreen extends Activity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(Splashscreen.this,
-                            NavigationActivity.class);
+                    Intent intent = new Intent(Splashscreen.this, LoginActivity.class);
+
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     Splashscreen.this.finish();
