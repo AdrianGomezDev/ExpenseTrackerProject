@@ -56,4 +56,10 @@
         android:layout_height="wrap_content"
         android:text="@string/nav_header_subtitle" />
 
+    <CheckBox
+        android:id="@+id/staySignedIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stay signed in" />
+
 </LinearLayout>

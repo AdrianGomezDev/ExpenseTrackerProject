@@ -1,5 +1,6 @@
 package com.example.expensetrackerproject;
 
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.app.Activity;
@@ -54,7 +55,13 @@ public class Splashscreen extends Activity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(Splashscreen.this, LoginActivity.class);
+
+                    //If user stayed signed in, go to Navigation Activity else go to Login
+                    Intent intent;
+                    if(SavedPreferences.isStaySignedIn(Splashscreen.this))
+                        intent = new Intent(Splashscreen.this, NavigationActivity.class);
+                    else
+                        intent = new Intent(Splashscreen.this, LoginActivity.class);
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
