@@ -22,6 +22,7 @@ import com.example.expensetrackerproject.expense.ExpenseFragment;
 import com.example.expensetrackerproject.graphing.GraphingFragment;
 import com.example.expensetrackerproject.login.LoginActivity;
 import com.example.expensetrackerproject.menu.PasswordFragment;
+import com.example.expensetrackerproject.menu.ProfileFragment;
 
 import java.util.Objects;
 
@@ -159,6 +160,7 @@ public class NavigationActivity extends AppCompatActivity
                 newFragment = new Share();
                 break;
             case R.id.nav_profile:
+                newFragment = ProfileFragment.newInstance(username);
                 break;
             case R.id.nav_password:
                 newFragment = PasswordFragment.newInstance(username);

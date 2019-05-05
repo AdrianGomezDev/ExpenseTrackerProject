@@ -288,4 +288,19 @@ public class DBHelper extends SQLiteOpenHelper
         db.update(USER_TABLE_NAME, contentValues, "username=?", new String[]{username});
 
     }
+
+    public void updateProfile(String username,
+            String fname, String lname, String email, int age)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USER_FNAME, fname);
+        contentValues.put(USER_LNAME, lname);
+        contentValues.put(USER_EMAIL, email);
+        contentValues.put(USER_AGE, age);
+
+        db.update(USER_TABLE_NAME, contentValues, "username=?", new String[]{username});
+
+    }
 }

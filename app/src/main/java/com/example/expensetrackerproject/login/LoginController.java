@@ -42,4 +42,9 @@ public class LoginController
         db.updatePassword(username, password);
     }
 
+    public void updateProfile(String username,
+                              String fname, String lname, String email, int age)
+    {
+        db.updateProfile(username, fname, lname, email, age);
+    }
 }
