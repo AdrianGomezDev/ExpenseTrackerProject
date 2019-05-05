@@ -50,20 +50,26 @@ public class NavigationActivity extends AppCompatActivity
 
         View headerView = navigationView.getHeaderView(0);
         Button signOut = headerView.findViewById(R.id.navSignOutButton);
+
+        //Toggles keeping user signed in option
+        final CheckBox staySignedIn = headerView.findViewById(R.id.staySignedIn);
+
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Remove stored username.  Uncheck signed in checkbox
+                SavedPreferences.removeUsername(NavigationActivity.this);
+                staySignedIn.setChecked(false);
 
-                startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
+                Intent intent = new Intent(NavigationActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
-        //Toggles keeping user signed in option
-        CheckBox staySignedIn = headerView.findViewById(R.id.staySignedIn);
-
         //Gets stored username or username from login bundle extra
         final String username;
-        if(SavedPreferences.isStaySignedIn(this)) {
+        if(SavedPreferences.isSignedIn(this)) {
             username = SavedPreferences.getSavedUsername(this);
             staySignedIn.setChecked(true);
         }
@@ -82,7 +88,6 @@ public class NavigationActivity extends AppCompatActivity
                 else
                     SavedPreferences.removeUsername(NavigationActivity.this);
 
-                SavedPreferences.toggleStaySignedin(NavigationActivity.this);
             }
         });
 

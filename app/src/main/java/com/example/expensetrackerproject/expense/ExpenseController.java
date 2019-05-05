@@ -4,7 +4,10 @@ import android.content.Context;
 
 import com.example.expensetrackerproject.data.DBHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ExpenseController
 {
@@ -62,8 +65,23 @@ public class ExpenseController
         return db.getSavings(username);
     }
 
-    public void balanceCheck(String username, int day, int month, int year)
+    public void balanceCheck(String username, String storedDate)
     {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        int day = 0;
+        int month = 0;
+        int year = 0;
+        try {
+            Date d = dateFormat.parse(storedDate);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(d);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+            month = calendar.get(Calendar.MONTH) + 1;
+            year = calendar.get(Calendar.YEAR);
+
+        } catch (ParseException e) {e.printStackTrace(); }
+
         double allowance = getAllowance(username);
         double expenses = getExpensesByDay(username, day, month, year);
         double balance = allowance - expenses;
@@ -73,5 +91,18 @@ public class ExpenseController
         else
             db.updateSavings(username, balance);
     }
+
+
+//    public void balanceCheck(String username, int day, int month, int year)
+//    {
+//        double allowance = getAllowance(username);
+//        double expenses = getExpensesByDay(username, day, month, year);
+//        double balance = allowance - expenses;
+//
+//        if(balance < 0)
+//            db.updateAllowance(username, balance);
+//        else
+//            db.updateSavings(username, balance);
+//    }
 
 }

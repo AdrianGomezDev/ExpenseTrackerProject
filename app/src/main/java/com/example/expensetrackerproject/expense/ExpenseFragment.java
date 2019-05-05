@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.expensetrackerproject.OnFragmentInteractionListener;
 import com.example.expensetrackerproject.R;
+import com.example.expensetrackerproject.SavedPreferences;
 import com.example.expensetrackerproject.graphing.GraphingFragment;
 
 import java.text.DecimalFormat;
@@ -82,50 +83,56 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_expense, container, false);
 
         controller = new ExpenseController(this.getActivity());
-
         username = getActivity().getIntent().getStringExtra("USERNAME");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        String todaysDate = dateFormat.format(date);
 
-        sharedPreferences = getActivity().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        if(!SavedPreferences.accessedToday(getActivity(), username));{
+            String storedDate = SavedPreferences.getStoredDate(getActivity(), username);
+            SavedPreferences.storeDate(getActivity(), username);
+            controller.balanceCheck(username, storedDate);
+        }
 
-
-//        String lastDate = sharedPreferences.getString("lastdate", "0");
-//        try {
-//            Date d = dateFormat.parse(lastDate);
-//            Calendar calendar = Calendar.getInstance();
-//            calendar.setTime(d);
-//            int day = calendar.get(Calendar.DAY_OF_MONTH);
-//            int month = calendar.get(Calendar.MONTH) + 1;
-//            int year = calendar.get(Calendar.YEAR);
-//            controller.balanceCheck(username, day, month, year);
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date = new Date();
+//        String todaysDate = dateFormat.format(date);
 //
-//        } catch (ParseException e) {e.printStackTrace(); }
-
-        if(sharedPreferences.getBoolean(username, true)) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(username + "-lastdate", todaysDate);
-            editor.putBoolean(username, false);
-            editor.commit();
-        }
-        else if(!sharedPreferences.getString(username + "-lastdate", "0").equals(todaysDate)) {
-            String lastDate = sharedPreferences.getString(username + "-lastdate", "0");
-            try {
-                Date d = dateFormat.parse(lastDate);
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(d);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH) + 1;
-                int year = calendar.get(Calendar.YEAR);
-                controller.balanceCheck(username, day, month, year);
-
-            } catch (ParseException e) {e.printStackTrace(); }
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(username + "-lastdate", todaysDate);
-            editor.commit();
-        }
+//        sharedPreferences = getActivity().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+//
+//
+////        String lastDate = sharedPreferences.getString("lastdate", "0");
+////        try {
+////            Date d = dateFormat.parse(lastDate);
+////            Calendar calendar = Calendar.getInstance();
+////            calendar.setTime(d);
+////            int day = calendar.get(Calendar.DAY_OF_MONTH);
+////            int month = calendar.get(Calendar.MONTH) + 1;
+////            int year = calendar.get(Calendar.YEAR);
+////            controller.balanceCheck(username, day, month, year);
+////
+////        } catch (ParseException e) {e.printStackTrace(); }
+//
+//        if(sharedPreferences.getBoolean(username, true)) {
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putString(username + "-lastdate", todaysDate);
+//            editor.putBoolean(username, false);
+//            editor.commit();
+//        }
+//        else if(!sharedPreferences.getString(username + "-lastdate", "0").equals(todaysDate)) {
+//            String lastDate = sharedPreferences.getString(username + "-lastdate", "0");
+//            try {
+//                Date d = dateFormat.parse(lastDate);
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(d);
+//                int day = calendar.get(Calendar.DAY_OF_MONTH);
+//                int month = calendar.get(Calendar.MONTH) + 1;
+//                int year = calendar.get(Calendar.YEAR);
+//                controller.balanceCheck(username, day, month, year);
+//
+//            } catch (ParseException e) {e.printStackTrace(); }
+//
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putString(username + "-lastdate", todaysDate);
+//            editor.commit();
+//        }
 
 
         savings = view.findViewById(R.id.savings);

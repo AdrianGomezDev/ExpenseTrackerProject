@@ -58,7 +58,7 @@ public class Splashscreen extends Activity {
 
                     //If user stayed signed in, go to Navigation Activity else go to Login
                     Intent intent;
-                    if(SavedPreferences.isStaySignedIn(Splashscreen.this))
+                    if(SavedPreferences.isSignedIn(Splashscreen.this))
                         intent = new Intent(Splashscreen.this, NavigationActivity.class);
                     else
                         intent = new Intent(Splashscreen.this, LoginActivity.class);
