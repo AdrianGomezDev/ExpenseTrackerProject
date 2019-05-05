@@ -257,7 +257,9 @@ public class DBHelper extends SQLiteOpenHelper
 
     public void updateAllowance(String username, double balance)
     {
-        SQLiteDatabase db = this.getReadableDatabase();
+//        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
+
         Cursor res =  db.rawQuery("select * from User " +
                         "where username= '" + username + "'",
                 null);
@@ -274,5 +276,16 @@ public class DBHelper extends SQLiteOpenHelper
             db.update(USER_TABLE_NAME, contentValues, "username=?", new String[]{username});
 
         }
+    }
+
+    public void updatePassword(String username, String password)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USER_PASSWORD, password);
+
+        db.update(USER_TABLE_NAME, contentValues, "username=?", new String[]{username});
+
     }
 }

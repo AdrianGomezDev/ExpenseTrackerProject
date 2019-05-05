@@ -93,16 +93,4 @@ public class ExpenseController
     }
 
 
-//    public void balanceCheck(String username, int day, int month, int year)
-//    {
-//        double allowance = getAllowance(username);
-//        double expenses = getExpensesByDay(username, day, month, year);
-//        double balance = allowance - expenses;
-//
-//        if(balance < 0)
-//            db.updateAllowance(username, balance);
-//        else
-//            db.updateSavings(username, balance);
-//    }
-
 }

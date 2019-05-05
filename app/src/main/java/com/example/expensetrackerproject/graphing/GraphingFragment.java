@@ -44,8 +44,7 @@ public class GraphingFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            username = getActivity().getIntent().getStringExtra("USERNAME");
-//            username = getArguments().getString(ARG_PARAM1);
+            username = getArguments().getString(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
             year = getArguments().getInt(ARG_PARAM3);
         }
@@ -62,9 +61,6 @@ public class GraphingFragment extends Fragment
 
 
         controller = new GraphingController(this.getActivity());
-        username = getActivity().getIntent().getStringExtra("USERNAME");
-//        month = getActivity().getIntent().getIntExtra("MONTH", 0);
-//        year = getActivity().getIntent().getIntExtra("YEAR", 0);
 
         barChart = view.findViewById(R.id.barchart);
 

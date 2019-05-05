@@ -23,6 +23,9 @@
     <string name="age">Age</string>
     <string name="income">Monthly Income</string>
     <string name="savings">Savings</string>
+    <string name="profile">Profile</string>
+    <string name="updateProfile">Update Profile</string>
+    <string name="changePassword">Change Password</string>
 
     <!--buttons  -->
     <string name="btn_login">Login</string>

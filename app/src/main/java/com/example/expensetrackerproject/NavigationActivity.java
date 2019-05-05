@@ -1,7 +1,6 @@
 package com.example.expensetrackerproject;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -17,10 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.example.expensetrackerproject.expense.ExpenseFragment;
 import com.example.expensetrackerproject.graphing.GraphingFragment;
 import com.example.expensetrackerproject.login.LoginActivity;
+import com.example.expensetrackerproject.menu.PasswordFragment;
 
 import java.util.Objects;
 
@@ -29,6 +30,7 @@ public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         OnFragmentInteractionListener{
 
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,6 @@ public class NavigationActivity extends AppCompatActivity
         });
 
         //Gets stored username or username from login bundle extra
-        final String username;
         if(SavedPreferences.isSignedIn(this)) {
             username = SavedPreferences.getSavedUsername(this);
             staySignedIn.setChecked(true);
@@ -76,12 +77,12 @@ public class NavigationActivity extends AppCompatActivity
         else
             username = getIntent().getStringExtra("USERNAME");
 
+        TextView profileUserName = headerView.findViewById(R.id.profileUsername);
+        profileUserName.setText(username);
 
-        staySignedIn.setOnClickListener(new View.OnClickListener()
-        {
+        staySignedIn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 boolean checked = ((CheckBox)v).isChecked();
                 if(checked)
                     SavedPreferences.saveUsername(NavigationActivity.this, username);
@@ -90,6 +91,7 @@ public class NavigationActivity extends AppCompatActivity
 
             }
         });
+
 
         // Creates and displays the home fragment
         Fragment home = new Home();
@@ -148,13 +150,18 @@ public class NavigationActivity extends AppCompatActivity
                 newFragment = new Home();
                 break;
             case R.id.nav_expense:
-                newFragment = new ExpenseFragment();
+                newFragment = ExpenseFragment.newInstance(username);
                 break;
             case R.id.nav_graphing:
-                newFragment = GraphingFragment.newInstance("", 5, 2019);
+                newFragment = GraphingFragment.newInstance(username, 5, 2019);
                 break;
             case R.id.nav_share:
                 newFragment = new Share();
+                break;
+            case R.id.nav_profile:
+                break;
+            case R.id.nav_password:
+                newFragment = PasswordFragment.newInstance(username);
                 break;
         }
 

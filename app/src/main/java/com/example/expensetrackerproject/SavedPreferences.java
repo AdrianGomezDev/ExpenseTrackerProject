@@ -9,7 +9,6 @@ import java.util.Date;
 public class SavedPreferences
 {
     private static final String PREFERENCES = "preferences";
-    private static final String STAY_SIGNED_IN_KEY = "signed_in";
     private static final String USERNAME_KEY = "username";
     private static final String ACCESS_PARTIAL_KEY = "+last_accessed";
 

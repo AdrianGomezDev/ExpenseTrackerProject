@@ -45,22 +45,15 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
 
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
-    private final String PREFERENCES = "preferences";
-    private SharedPreferences sharedPreferences;
-
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
     private OnFragmentInteractionListener mListener;
 
     public ExpenseFragment(){}
 
-    public static ExpenseFragment newInstance(String param1, String param2) {
+    public static ExpenseFragment newInstance(String username) {
         ExpenseFragment fragment = new ExpenseFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,8 +63,7 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
     {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString(ARG_PARAM1);
         }
     }
 
@@ -83,57 +75,13 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_expense, container, false);
 
         controller = new ExpenseController(this.getActivity());
-        username = getActivity().getIntent().getStringExtra("USERNAME");
 
-        if(!SavedPreferences.accessedToday(getActivity(), username));{
+        if(!SavedPreferences.accessedToday(getActivity(), username)){
             String storedDate = SavedPreferences.getStoredDate(getActivity(), username);
             SavedPreferences.storeDate(getActivity(), username);
             controller.balanceCheck(username, storedDate);
+
         }
-
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Date date = new Date();
-//        String todaysDate = dateFormat.format(date);
-//
-//        sharedPreferences = getActivity().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
-//
-//
-////        String lastDate = sharedPreferences.getString("lastdate", "0");
-////        try {
-////            Date d = dateFormat.parse(lastDate);
-////            Calendar calendar = Calendar.getInstance();
-////            calendar.setTime(d);
-////            int day = calendar.get(Calendar.DAY_OF_MONTH);
-////            int month = calendar.get(Calendar.MONTH) + 1;
-////            int year = calendar.get(Calendar.YEAR);
-////            controller.balanceCheck(username, day, month, year);
-////
-////        } catch (ParseException e) {e.printStackTrace(); }
-//
-//        if(sharedPreferences.getBoolean(username, true)) {
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putString(username + "-lastdate", todaysDate);
-//            editor.putBoolean(username, false);
-//            editor.commit();
-//        }
-//        else if(!sharedPreferences.getString(username + "-lastdate", "0").equals(todaysDate)) {
-//            String lastDate = sharedPreferences.getString(username + "-lastdate", "0");
-//            try {
-//                Date d = dateFormat.parse(lastDate);
-//                Calendar calendar = Calendar.getInstance();
-//                calendar.setTime(d);
-//                int day = calendar.get(Calendar.DAY_OF_MONTH);
-//                int month = calendar.get(Calendar.MONTH) + 1;
-//                int year = calendar.get(Calendar.YEAR);
-//                controller.balanceCheck(username, day, month, year);
-//
-//            } catch (ParseException e) {e.printStackTrace(); }
-//
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putString(username + "-lastdate", todaysDate);
-//            editor.commit();
-//        }
-
 
         savings = view.findViewById(R.id.savings);
         displaySavings();

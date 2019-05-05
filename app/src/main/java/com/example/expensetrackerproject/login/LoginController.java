@@ -37,4 +37,9 @@ public class LoginController
 
     }
 
+    public void changePassword(String username, String password)
+    {
+        db.updatePassword(username, password);
+    }
+
 }
