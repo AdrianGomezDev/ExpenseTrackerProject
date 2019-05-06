@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.expensetrackerproject.expense.ExpenseFragment;
 import com.example.expensetrackerproject.graphing.GraphingFragment;
 import com.example.expensetrackerproject.login.LoginActivity;
+import com.example.expensetrackerproject.menu.HelpFragment;
 import com.example.expensetrackerproject.menu.PasswordFragment;
 import com.example.expensetrackerproject.menu.ProfileFragment;
 
@@ -156,8 +157,8 @@ public class NavigationActivity extends AppCompatActivity
             case R.id.nav_graphing:
                 newFragment = GraphingFragment.newInstance(username, 5, 2019);
                 break;
-            case R.id.nav_share:
-                newFragment = new Share();
+            case R.id.nav_help:
+                newFragment = HelpFragment.newInstance("", "");
                 break;
             case R.id.nav_profile:
                 newFragment = ProfileFragment.newInstance(username);
