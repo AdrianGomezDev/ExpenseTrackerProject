@@ -19,12 +19,12 @@
             android:title="@string/analytics" />
     </group>
 
-    <item android:title="@string/communicate">
+    <item android:title="@string/info">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/share" />
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_about_star"
+                android:title="@string/about" />
         </menu>
     </item>
 

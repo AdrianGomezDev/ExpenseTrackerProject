@@ -156,8 +156,8 @@ public class NavigationActivity extends AppCompatActivity
             case R.id.nav_graphing:
                 newFragment = GraphingFragment.newInstance(username, 5, 2019);
                 break;
-            case R.id.nav_share:
-                newFragment = new Share();
+            case R.id.nav_about:
+                newFragment = new About();
                 break;
             case R.id.nav_profile:
                 newFragment = ProfileFragment.newInstance(username);

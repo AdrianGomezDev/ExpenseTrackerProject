@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.expensetrackerproject.OnFragmentInteractionListener;
 import com.example.expensetrackerproject.R;
@@ -18,7 +19,7 @@ public class GraphingFragment extends Fragment
     private String username;
     private int month;
     private int year;
-
+    private  String months[] = {"January","February","March", "April","May","June","July","August","September","October","November","December"};
     private BarChart barChart;
 
     private static final String ARG_PARAM1 = "username";
@@ -55,11 +56,12 @@ public class GraphingFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("Expenses");
+        getActivity().setTitle("Analytics");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_graphing, container, false);
-
-
+        String content = months[month-1] + " "+ year;
+        TextView top_date =  view.findViewById(R.id.date);
+        top_date.setText(content);
         controller = new GraphingController(this.getActivity());
 
         barChart = view.findViewById(R.id.barchart);

@@ -35,4 +35,7 @@
     <string name="btn_return2login">Return to Login</string>
     <string name="expense">Expense</string>
     <string name="expenses">Expenses</string>
+    <string name="about">About</string>
+    <string name="about_expense_tracker">About Expense Tracker</string>
+    <string name="info">Info</string>
 </resources>
