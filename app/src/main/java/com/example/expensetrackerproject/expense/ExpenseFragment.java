@@ -76,12 +76,19 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
 
         controller = new ExpenseController(this.getActivity());
 
-        if(!SavedPreferences.accessedToday(getActivity(), username)){
-            String storedDate = SavedPreferences.getStoredDate(getActivity(), username);
+        //Checks if first time launch, if so registers user and stores date
+        if(SavedPreferences.isFirstLaunch(getActivity(), username)){
+            SavedPreferences.registerUser(getActivity(), username);
             SavedPreferences.storeDate(getActivity(), username);
+        }
+        else if(!SavedPreferences.accessedToday(getActivity(), username)){
+            String storedDate = SavedPreferences.getStoredDate(getActivity(), username);
             controller.balanceCheck(username, storedDate);
 
+            SavedPreferences.storeDate(getActivity(), username);
+
         }
+
 
         savings = view.findViewById(R.id.savings);
         displaySavings();

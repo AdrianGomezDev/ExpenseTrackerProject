@@ -27,6 +27,10 @@
     <string name="updateProfile">Update Profile</string>
     <string name="changePassword">Change Password</string>
 
+    <string name="about">
+        The Expense Tracker app calculates a daily allowance based on your income
+        and provides an easy way to track expenses.</string>
+
     <!--buttons  -->
     <string name="btn_login">Login</string>
     <string name="btn_newUser">New User</string>

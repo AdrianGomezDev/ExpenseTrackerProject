@@ -89,8 +89,7 @@ public class ExpenseController
         if(balance < 0)
             db.updateAllowance(username, balance);
         else
-            db.updateSavings(username, balance);
+            insertTransaction(username, "savings", balance);
     }
-
 
 }
