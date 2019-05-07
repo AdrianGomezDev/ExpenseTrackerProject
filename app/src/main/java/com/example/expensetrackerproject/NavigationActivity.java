@@ -1,6 +1,5 @@
 package com.example.expensetrackerproject;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +22,7 @@ import com.example.expensetrackerproject.expense.ExpenseFragment;
 import com.example.expensetrackerproject.graphing.GraphingFragment;
 import com.example.expensetrackerproject.login.LoginActivity;
 import com.example.expensetrackerproject.menu.AboutFragment;
+import com.example.expensetrackerproject.menu.DemoFragment;
 import com.example.expensetrackerproject.menu.HelpFragment;
 import com.example.expensetrackerproject.menu.PasswordFragment;
 import com.example.expensetrackerproject.menu.ProfileFragment;

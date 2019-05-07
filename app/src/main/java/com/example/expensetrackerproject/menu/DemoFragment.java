@@ -1,8 +1,6 @@
-package com.example.expensetrackerproject;
+package com.example.expensetrackerproject.menu;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,17 +13,11 @@ import android.widget.Toast;
 
 import com.example.expensetrackerproject.OnFragmentInteractionListener;
 import com.example.expensetrackerproject.R;
-import com.example.expensetrackerproject.SavedPreferences;
 import com.example.expensetrackerproject.expense.ExpenseController;
-import com.example.expensetrackerproject.graphing.GraphingFragment;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class DemoFragment extends Fragment implements View.OnClickListener
 {
@@ -203,6 +195,10 @@ public class DemoFragment extends Fragment implements View.OnClickListener
                 String todaysDate = dateFormat.format(date);
 
                 controller.balanceCheck(username, todaysDate);
+                displaySavings();
+                displayAllowance();
+                displayExpenses();
+                displayBalance();
             }
 
         }
