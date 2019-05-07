@@ -1,5 +1,6 @@
 package com.example.expensetrackerproject;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +34,7 @@ public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         OnFragmentInteractionListener{
 
+    private MenuItem demo;
     private String username;
 
     @Override
@@ -52,6 +54,8 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Menu menu = navigationView.getMenu();
+        demo = menu.findItem(R.id.demo);
 
         View headerView = navigationView.getHeaderView(0);
         Button signOut = headerView.findViewById(R.id.navSignOutButton);
@@ -134,7 +138,8 @@ public class NavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_demo) {
+            demo.setVisible(!demo.isVisible());
             return true;
         }
 
@@ -169,6 +174,9 @@ public class NavigationActivity extends AppCompatActivity
                 break;
             case R.id.nav_password:
                 newFragment = PasswordFragment.newInstance(username);
+                break;
+            case R.id.nav_demo:
+                newFragment = DemoFragment.newInstance(username);
                 break;
         }
 
