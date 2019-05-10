@@ -101,12 +101,12 @@ public class NavigationActivity extends AppCompatActivity
 
 
         // Creates and displays the home fragment
-        Fragment home = new Home();
+        Fragment  expense = ExpenseFragment.newInstance(username);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_container, home);
+        ft.replace(R.id.fragment_container, expense);
         ft.commit();
         // Highlights the Home item in the nav drawer
-        navigationView.setCheckedItem(R.id.nav_home);
+        navigationView.setCheckedItem(R.id.nav_expense);
     }
 
     @Override
@@ -156,9 +156,7 @@ public class NavigationActivity extends AppCompatActivity
 
         //initializing the fragment object which is selected
         switch (item.getItemId()) {
-            case R.id.nav_home:
-                newFragment = new Home();
-                break;
+
             case R.id.nav_expense:
                 newFragment = ExpenseFragment.newInstance(username);
                 break;
