@@ -3,39 +3,39 @@ package com.example.expensetrackerproject.graphing;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.expensetrackerproject.OnFragmentInteractionListener;
 import com.example.expensetrackerproject.R;
-import com.example.expensetrackerproject.graphing.GraphingActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 
-public class GraphingActivity extends Fragment
+public class GraphingFragment extends Fragment
 {
     private GraphingController controller;
     private String username;
     private int month;
     private int year;
-
+    private  String months[] = {"January","February","March", "April","May","June","July","August","September","October","November","December"};
     private BarChart barChart;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
+    private static final String ARG_PARAM1 = "username";
+    private static final String ARG_PARAM2 = "month";
+    private static final String ARG_PARAM3 = "year";
+
     private OnFragmentInteractionListener mListener;
 
-    public GraphingActivity(){}
+    public GraphingFragment(){}
 
-    public static GraphingActivity newInstance(String param1, String param2) {
-        GraphingActivity fragment = new GraphingActivity();
+    public static GraphingFragment newInstance(String username, int month, int year) {
+        GraphingFragment fragment = new GraphingFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, username);
+        args.putInt(ARG_PARAM2, month);
+        args.putInt(ARG_PARAM3, year);
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,8 +45,9 @@ public class GraphingActivity extends Fragment
     {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString(ARG_PARAM1);
+            month = getArguments().getInt(ARG_PARAM2);
+            year = getArguments().getInt(ARG_PARAM3);
         }
 
 
@@ -55,15 +56,13 @@ public class GraphingActivity extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("Expenses");
+        getActivity().setTitle("Analytics");
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_expense, container, false);
-
-
+        View view = inflater.inflate(R.layout.fragment_graphing, container, false);
+        String content = months[month-1] + " "+ year;
+        TextView top_date =  view.findViewById(R.id.date);
+        top_date.setText(content);
         controller = new GraphingController(this.getActivity());
-        username = getActivity().getIntent().getStringExtra("USERNAME");
-        month = getActivity().getIntent().getIntExtra("MONTH", 0);
-        year = getActivity().getIntent().getIntExtra("YEAR", 0);
 
         barChart = view.findViewById(R.id.barchart);
 

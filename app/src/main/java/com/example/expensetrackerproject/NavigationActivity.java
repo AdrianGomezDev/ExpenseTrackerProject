@@ -15,11 +15,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.expensetrackerproject.expense.ExpenseActivity;
-import com.example.expensetrackerproject.graphing.GraphingActivity;
+import com.example.expensetrackerproject.expense.ExpenseFragment;
+import com.example.expensetrackerproject.graphing.GraphingFragment;
 import com.example.expensetrackerproject.login.LoginActivity;
+import com.example.expensetrackerproject.menu.AboutFragment;
+import com.example.expensetrackerproject.menu.DemoFragment;
+import com.example.expensetrackerproject.menu.HelpFragment;
+import com.example.expensetrackerproject.menu.PasswordFragment;
+import com.example.expensetrackerproject.menu.ProfileFragment;
 
 import java.util.Objects;
 
@@ -28,6 +34,8 @@ public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         OnFragmentInteractionListener{
 
+    private MenuItem demo;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +54,59 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Menu menu = navigationView.getMenu();
+        demo = menu.findItem(R.id.demo);
 
         View headerView = navigationView.getHeaderView(0);
         Button signOut = headerView.findViewById(R.id.navSignOutButton);
+
+        //Toggles keeping user signed in option
+        final CheckBox staySignedIn = headerView.findViewById(R.id.staySignedIn);
+
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Remove stored username.  Uncheck signed in checkbox
+                SavedPreferences.removeUsername(NavigationActivity.this);
+                staySignedIn.setChecked(false);
 
-                startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
+                Intent intent = new Intent(NavigationActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
+        //Gets stored username or username from login bundle extra
+        if(SavedPreferences.isSignedIn(this)) {
+            username = SavedPreferences.getSavedUsername(this);
+            staySignedIn.setChecked(true);
+        }
+        else
+            username = getIntent().getStringExtra("USERNAME");
+
+        TextView profileUserName = headerView.findViewById(R.id.profileUsername);
+        profileUserName.setText(username);
+
+        staySignedIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox)v).isChecked();
+                if(checked)
+                    SavedPreferences.saveUsername(NavigationActivity.this, username);
+                else
+                    SavedPreferences.removeUsername(NavigationActivity.this);
+
+            }
+        });
+
+
         // Creates and displays the home fragment
-        Fragment home = new Home();
+        Fragment  expense = ExpenseFragment.newInstance(username);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_container, home);
+        ft.replace(R.id.fragment_container, expense);
         ft.commit();
         // Highlights the Home item in the nav drawer
-        navigationView.setCheckedItem(R.id.nav_home);
+        navigationView.setCheckedItem(R.id.nav_expense);
     }
 
     @Override
@@ -95,7 +138,10 @@ public class NavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+      
+
+        if (id == R.id.action_demo) {
+            demo.setVisible(!demo.isVisible());
             return true;
         }
 
@@ -110,17 +156,31 @@ public class NavigationActivity extends AppCompatActivity
 
         //initializing the fragment object which is selected
         switch (item.getItemId()) {
-            case R.id.nav_home:
-                newFragment = new Home();
-                break;
+
             case R.id.nav_expense:
-                newFragment = new ExpenseActivity();
+                newFragment = ExpenseFragment.newInstance(username);
                 break;
             case R.id.nav_graphing:
-                newFragment = new GraphingActivity();
+                newFragment = GraphingFragment.newInstance(username, 5, 2019);
                 break;
-            case R.id.nav_share:
-                newFragment = new Share();
+            case R.id.nav_about:
+
+
+
+                newFragment = AboutFragment.newInstance();
+                break;
+            case R.id.nav_help:
+                newFragment = HelpFragment.newInstance();
+
+                break;
+            case R.id.nav_profile:
+                newFragment = ProfileFragment.newInstance(username);
+                break;
+            case R.id.nav_password:
+                newFragment = PasswordFragment.newInstance(username);
+                break;
+            case R.id.nav_demo:
+                newFragment = DemoFragment.newInstance(username);
                 break;
         }
 

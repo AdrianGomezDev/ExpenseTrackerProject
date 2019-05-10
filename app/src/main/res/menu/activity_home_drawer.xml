@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_home"
-            android:title="@string/home" />
+
         <item
             android:id="@+id/nav_expense"
             android:icon="@drawable/ic_menu_expense"
@@ -19,13 +17,60 @@
             android:title="@string/analytics" />
     </group>
 
-    <item android:title="@string/communicate">
+
+
+    <item android:title="@string/information">
         <menu>
+            <group android:checkableBehavior="single">
+
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/share" />
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_about_star"
+                android:title="@string/about" />
+                <!--android:icon="@drawable/ic_menu_about"-->
+
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/ic_menu_help"
+                android:title="@string/help" />
+            </group>
+
+
         </menu>
     </item>
+
+    <item android:title="@string/profile">
+        <menu>
+            <group android:checkableBehavior="single">
+
+            <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_profile"
+            android:title="@string/updateProfile" />
+
+            <item
+                android:id="@+id/nav_password"
+                android:icon="@drawable/ic_menu_password"
+                android:title="@string/changePassword" />
+
+            </group>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/demo"
+        android:title="demo"
+        android:visible="false">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_demo"
+                    android:icon="@drawable/ic_menu_demo"
+                    android:title="demo" />
+            </group>
+        </menu>
+    </item>
+
 
 </menu>

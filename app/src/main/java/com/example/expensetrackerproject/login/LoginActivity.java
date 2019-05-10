@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.example.expensetrackerproject.NavigationActivity;
 import com.example.expensetrackerproject.R;
-import com.example.expensetrackerproject.expense.ExpenseActivity;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -42,9 +41,9 @@ public class LoginActivity extends AppCompatActivity
                 String user = inUsername.getText().toString();
                 String pass = inPassword.getText().toString();
                 if(controller.login(user, pass)) {
-                    Intent expenseActivity = new Intent(getApplicationContext(), NavigationActivity.class);
-                    expenseActivity.putExtra("USERNAME",  user);
-                    startActivity(expenseActivity);
+                    Intent navActivity = new Intent(getApplicationContext(), NavigationActivity.class);
+                    navActivity.putExtra("USERNAME",  user);
+                    startActivity(navActivity);
 
                 }
                 else {
