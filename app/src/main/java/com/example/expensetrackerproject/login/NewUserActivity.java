@@ -21,7 +21,6 @@ public class NewUserActivity extends AppCompatActivity
 {
 
 
-    private DBHelper db;
     private EditText createUserName;      //not explicitly necessary for validation, may be needed later
     private EditText createPassword;
     private EditText createRetypePass;
@@ -83,7 +82,7 @@ public class NewUserActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                if(validateFields(fieldData) && validatePassword() && validateEmail() && validateAge() && validateName() && validateUserName()) {
+                if(validateFields(fieldData) && validatePassword() && validateEmail() && validateAge()) {
 
                     Toast.makeText(getApplicationContext(), "New user added", Toast.LENGTH_LONG).show();
                     btnReturn2login.setVisibility(View.VISIBLE);
@@ -141,42 +140,10 @@ public class NewUserActivity extends AppCompatActivity
         return true;
     }
 
-    /**
-     * Validates username  to be unique  , displays toast if invalid
-     *
-     * @return boolean  true if less than 60 chars, false otherwise
-     */
-    private boolean validateUserName()
-    {
-        if (createUserName.getText().toString().length() > 60){
-            Toast.makeText(getApplicationContext(), "User Name too long", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        else if ( !db.checkUser(createUserName.getText().toString())){
-            Toast.makeText(getApplicationContext(), "User Name already exists", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
 
 
-    /**
-     * Validates name  length for database , displays toast if invalid
-     *
-     * @return boolean  true if less than 60 chars, false otherwise
-     */
-    private boolean validateName()
-    {
-        if (createFirstName.getText().toString().length() > 60){
-            Toast.makeText(getApplicationContext(), "First Name too long", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        else if (createLastName.getText().toString().length() > 60){
-            Toast.makeText(getApplicationContext(), "First Name too long", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
+
+
 
     /**
      * Validates password and retype password match, displays toast if invalid
@@ -189,10 +156,7 @@ public class NewUserActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Password mismatch", Toast.LENGTH_LONG).show();
             return false;
         }
-        else if (createPassword.getText().toString().length() > 60){
-            Toast.makeText(getApplicationContext(), "Password too long", Toast.LENGTH_LONG).show();
-            return false;
-        }
+
         return true;
     }
 
