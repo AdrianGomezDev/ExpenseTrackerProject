@@ -1,22 +1,43 @@
-package com.example.expensetrackerproject;
-import android.app.Activity;
+package com.example.expensetrackerproject.menu;
+
 import android.content.Context;
-import android.widget.TextView;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-public class About extends Fragment {
+import android.widget.TextView;
 
 
+import com.example.expensetrackerproject.OnFragmentInteractionListener;
+import com.example.expensetrackerproject.R;
+
+public class AboutFragment extends Fragment{
     private OnFragmentInteractionListener mListener;
 
-    public About() {
+    public AboutFragment() {
         // Required empty public constructor
+    }
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+
+     * @return A new instance of fragment About.
+     */
+    public static AboutFragment newInstance() {
+        AboutFragment fragment = new AboutFragment();
+
+        return fragment;
     }
 
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

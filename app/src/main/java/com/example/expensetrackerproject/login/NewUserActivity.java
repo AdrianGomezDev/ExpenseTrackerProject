@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.expensetrackerproject.R;
+import com.example.expensetrackerproject.data.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +20,17 @@ import java.util.regex.Matcher;
 public class NewUserActivity extends AppCompatActivity
 {
 
-    //    private EditText createUserName;      //not explicitly necessary for validation, may be needed later
+
+    private DBHelper db;
+    private EditText createUserName;      //not explicitly necessary for validation, may be needed later
     private EditText createPassword;
     private EditText createRetypePass;
-    //    private EditText createFirstName;     //""
-//    private EditText createLastName;      //""
+    private EditText createFirstName;
+    private EditText createLastName;
     private EditText createEmail;
     private EditText createAge;
-    private EditText createIncome;
-    private EditText createSavings;
+    //private EditText createIncome;
+    //private EditText createSavings;
 
     private Button btnCancel;
     private Button btnSave;
@@ -46,15 +49,15 @@ public class NewUserActivity extends AppCompatActivity
         fieldData = new ArrayList<>();
 
 
-//        createUserName = (EditText)findViewById(R.id.create_username);
+        createUserName = (EditText)findViewById(R.id.create_username);
         createPassword = (EditText)findViewById(R.id.create_password);
         createRetypePass = (EditText)findViewById(R.id.create_retypePassword);
-//        createFirstName = (EditText)findViewById(R.id.create_firstname);
-//        createLastName = (EditText)findViewById(R.id.create_lastname);
+        createFirstName = (EditText)findViewById(R.id.create_firstname);
+       createLastName = (EditText)findViewById(R.id.create_lastname);
         createEmail = (EditText)findViewById(R.id.create_email);
         createAge = (EditText)findViewById(R.id.create_age);
-        createIncome = (EditText)findViewById(R.id.create_income);
-        createSavings = (EditText)findViewById(R.id.create_savings);
+        //createIncome = (EditText)findViewById(R.id.create_income);
+        //createSavings = (EditText)findViewById(R.id.create_savings);
 
         //cancel button
         btnCancel = (Button)findViewById(R.id.btn_cancel);
@@ -80,7 +83,7 @@ public class NewUserActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                if(validateFields(fieldData) && validatePassword() && validateEmail() && validateAge()) {
+                if(validateFields(fieldData) && validatePassword() && validateEmail() && validateAge() && validateName() && validateUserName()) {
 
                     Toast.makeText(getApplicationContext(), "New user added", Toast.LENGTH_LONG).show();
                     btnReturn2login.setVisibility(View.VISIBLE);
@@ -139,14 +142,55 @@ public class NewUserActivity extends AppCompatActivity
     }
 
     /**
+     * Validates username  to be unique  , displays toast if invalid
+     *
+     * @return boolean  true if less than 60 chars, false otherwise
+     */
+    private boolean validateUserName()
+    {
+        if (createUserName.getText().toString().length() > 60){
+            Toast.makeText(getApplicationContext(), "User Name too long", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if ( !db.checkUser(createUserName.getText().toString())){
+            Toast.makeText(getApplicationContext(), "User Name already exists", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * Validates name  length for database , displays toast if invalid
+     *
+     * @return boolean  true if less than 60 chars, false otherwise
+     */
+    private boolean validateName()
+    {
+        if (createFirstName.getText().toString().length() > 60){
+            Toast.makeText(getApplicationContext(), "First Name too long", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if (createLastName.getText().toString().length() > 60){
+            Toast.makeText(getApplicationContext(), "First Name too long", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Validates password and retype password match, displays toast if invalid
      *
      * @return boolean  true if match, false otherwise
      */
     private boolean validatePassword()
     {
-        if(!createPassword.getText().toString().equals(createRetypePass.getText().toString())) {
+         if(!createPassword.getText().toString().equals(createRetypePass.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Password mismatch", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if (createPassword.getText().toString().length() > 60){
+            Toast.makeText(getApplicationContext(), "Password too long", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

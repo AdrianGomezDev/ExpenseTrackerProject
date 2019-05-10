@@ -1,8 +1,6 @@
-package com.example.expensetrackerproject.expense;
+package com.example.expensetrackerproject.menu;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,18 +13,13 @@ import android.widget.Toast;
 
 import com.example.expensetrackerproject.OnFragmentInteractionListener;
 import com.example.expensetrackerproject.R;
-import com.example.expensetrackerproject.SavedPreferences;
-import com.example.expensetrackerproject.graphing.GraphingFragment;
+import com.example.expensetrackerproject.expense.ExpenseController;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
-import static android.content.Context.MODE_PRIVATE;
-
-public class ExpenseFragment extends Fragment implements View.OnClickListener
+public class DemoFragment extends Fragment implements View.OnClickListener
 {
     private ExpenseController controller;
 
@@ -40,6 +33,7 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
     private Button btnExpense;
     private Button btnDeposit;
     private Button btnWithdraw;
+    private Button btnDemo;
 
     private EditText input;
 
@@ -48,10 +42,10 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
     private static final String ARG_PARAM1 = "param1";
     private OnFragmentInteractionListener mListener;
 
-    public ExpenseFragment(){}
+    public DemoFragment(){}
 
-    public static ExpenseFragment newInstance(String username) {
-        ExpenseFragment fragment = new ExpenseFragment();
+    public static DemoFragment newInstance(String username) {
+        DemoFragment fragment = new DemoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, username);
         fragment.setArguments(args);
@@ -76,20 +70,6 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
 
         controller = new ExpenseController(this.getActivity());
 
-        //Checks if first time launch, if so registers user and stores date
-        if(SavedPreferences.isFirstLaunch(getActivity(), username)){
-            SavedPreferences.registerUser(getActivity(), username);
-            SavedPreferences.storeDate(getActivity(), username);
-        }
-        else if(!SavedPreferences.accessedToday(getActivity(), username)){
-            String storedDate = SavedPreferences.getStoredDate(getActivity(), username);
-            controller.balanceCheck(username, storedDate);
-
-            SavedPreferences.storeDate(getActivity(), username);
-
-        }
-
-
         savings = view.findViewById(R.id.savings);
         displaySavings();
         allowance = view.findViewById(R.id.allowance);
@@ -107,6 +87,10 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
         btnDeposit.setOnClickListener(this);
         btnWithdraw = view.findViewById(R.id.withdraw);
         btnWithdraw.setOnClickListener(this);
+
+        btnDemo = view.findViewById(R.id.btn_demo);
+        btnDemo.setVisibility(View.VISIBLE);
+        btnDemo.setOnClickListener(this);
 
         return view;
     }
@@ -203,6 +187,18 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener
                         Toast.makeText(this.getActivity(), "Withdrawal amount exceeds Savings", Toast.LENGTH_LONG).show();
 
                 }
+            }
+            case R.id.btn_demo:
+            {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = new Date();
+                String todaysDate = dateFormat.format(date);
+
+                controller.balanceCheck(username, todaysDate);
+                displaySavings();
+                displayAllowance();
+                displayExpenses();
+                displayBalance();
             }
 
         }

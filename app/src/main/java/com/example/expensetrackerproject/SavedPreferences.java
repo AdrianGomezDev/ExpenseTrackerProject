@@ -11,9 +11,27 @@ public class SavedPreferences
     private static final String PREFERENCES = "preferences";
     private static final String USERNAME_KEY = "username";
     private static final String ACCESS_PARTIAL_KEY = "+last_accessed";
+    private static final String FIRSTLAUNCH_PARTIAL_KEY = "+first_launch";
 
     public SavedPreferences(){}
 
+    public static boolean isFirstLaunch(Context context, String username)
+    {
+        SharedPreferences sharedPref =
+                context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+
+        return sharedPref.getBoolean(username + FIRSTLAUNCH_PARTIAL_KEY, true);
+    }
+
+    public static void registerUser(Context context, String username)
+    {
+        SharedPreferences sharedPref =
+                context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(username + FIRSTLAUNCH_PARTIAL_KEY, false);
+        editor.commit();
+    }
 
     public static boolean isSignedIn(Context context)
     {

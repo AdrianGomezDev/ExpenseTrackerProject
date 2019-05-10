@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/colorAccent">
+
+
+
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/help_dog"
+            android:layout_width="141dp"
+            android:layout_height="141dp"
+            android:background="@drawable/splash_img"></android.support.constraint.ConstraintLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@android:dimen/app_icon_size"
+
+            android:text="@string/help"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/help_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textAlignment="textStart"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@android:dimen/app_icon_size"
+
+            android:text="@string/expensesColon"
+            android:textAlignment="textStart"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:id="@+id/help_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textAlignment="textStart"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@android:dimen/app_icon_size"
+
+            android:text="@string/analyticsColon"
+            android:textAlignment="textStart"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:id="@+id/help_points_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textAlignment="textStart"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@android:dimen/app_icon_size"
+            android:text="@string/furtherInquires"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+
+    </android.support.v7.widget.LinearLayoutCompat></ScrollView>

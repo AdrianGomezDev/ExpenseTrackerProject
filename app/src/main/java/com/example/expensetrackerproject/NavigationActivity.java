@@ -21,6 +21,9 @@ import android.widget.TextView;
 import com.example.expensetrackerproject.expense.ExpenseFragment;
 import com.example.expensetrackerproject.graphing.GraphingFragment;
 import com.example.expensetrackerproject.login.LoginActivity;
+import com.example.expensetrackerproject.menu.AboutFragment;
+import com.example.expensetrackerproject.menu.DemoFragment;
+import com.example.expensetrackerproject.menu.HelpFragment;
 import com.example.expensetrackerproject.menu.PasswordFragment;
 import com.example.expensetrackerproject.menu.ProfileFragment;
 
@@ -31,6 +34,7 @@ public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         OnFragmentInteractionListener{
 
+    private MenuItem demo;
     private String username;
 
     @Override
@@ -50,6 +54,8 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Menu menu = navigationView.getMenu();
+        demo = menu.findItem(R.id.demo);
 
         View headerView = navigationView.getHeaderView(0);
         Button signOut = headerView.findViewById(R.id.navSignOutButton);
@@ -133,6 +139,9 @@ public class NavigationActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+        if (id == R.id.action_demo) {
+            demo.setVisible(!demo.isVisible());
             return true;
         }
 
@@ -157,13 +166,23 @@ public class NavigationActivity extends AppCompatActivity
                 newFragment = GraphingFragment.newInstance(username, 5, 2019);
                 break;
             case R.id.nav_about:
-                newFragment = new About();
+
+
+
+                newFragment = AboutFragment.newInstance();
+                break;
+            case R.id.nav_help:
+                newFragment = HelpFragment.newInstance();
+
                 break;
             case R.id.nav_profile:
                 newFragment = ProfileFragment.newInstance(username);
                 break;
             case R.id.nav_password:
                 newFragment = PasswordFragment.newInstance(username);
+                break;
+            case R.id.nav_demo:
+                newFragment = DemoFragment.newInstance(username);
                 break;
         }
 

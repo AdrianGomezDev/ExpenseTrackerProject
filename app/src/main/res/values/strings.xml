@@ -26,6 +26,10 @@
     <string name="profile">Profile</string>
     <string name="updateProfile">Update Profile</string>
     <string name="changePassword">Change Password</string>
+    <string name="demo">Demo</string>
+
+    <string name="action_demo">DEMO</string>
+
 
     <!--buttons  -->
     <string name="btn_login">Login</string>
@@ -38,4 +42,11 @@
     <string name="about">About</string>
     <string name="about_expense_tracker">About Expense Tracker</string>
     <string name="info">Info</string>
+    <string name="help">Help</string>
+    <string name="information">Information</string>
+    <string name="expensesColon">Expenses:</string>
+    <string name="analyticsColon">Analytics:</string>
+    <string name="furtherInquires">For further inquires email : expenseTracker@gmail.com</string>
+
+
 </resources>
