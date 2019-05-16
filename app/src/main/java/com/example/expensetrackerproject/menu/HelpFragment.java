@@ -1,7 +1,7 @@
 package com.example.expensetrackerproject.menu;
 
 import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,7 +28,7 @@ public class HelpFragment extends Fragment{
 
      * @return A new instance of fragment Help.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static HelpFragment newInstance() {
         HelpFragment fragment = new HelpFragment();
 
@@ -51,7 +51,7 @@ public class HelpFragment extends Fragment{
         TextView points =  hview.findViewById(R.id.help_points);
         String pcontent= "\nExpense button is used to subtract from daily allowance. " +
                          "\nDeposit button adds money into savings. " +
-                         "\nWithdarw button takes money from savings." ;
+                         "\nWithdraw button takes money from savings." ;
 
         points.setText(pcontent);
         TextView points_2 =  hview.findViewById(R.id.help_points_2);

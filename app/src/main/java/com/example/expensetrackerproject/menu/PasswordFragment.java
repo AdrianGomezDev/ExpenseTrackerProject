@@ -23,7 +23,7 @@ public class PasswordFragment extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
 
     // TODO: Rename and change types of parameters
     private String username;
@@ -38,9 +38,9 @@ public class PasswordFragment extends Fragment{
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment Home.
+     * @return A new instance of Password Fragment.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static PasswordFragment newInstance(String username) {
         PasswordFragment fragment = new PasswordFragment();
         Bundle args = new Bundle();
@@ -96,12 +96,7 @@ public class PasswordFragment extends Fragment{
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentMessage("Home", uri);
-        }
-    }
+
 
     @Override
     public void onAttach(Context context) {

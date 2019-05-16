@@ -12,6 +12,12 @@ import java.util.Date;
 public class ExpenseController
 {
     private DBHelper db;
+    Calendar calendar = Calendar.getInstance();
+    int day = calendar.get(Calendar.DAY_OF_MONTH);
+    int month = calendar.get(Calendar.MONTH) + 1;
+    int year = calendar.get(Calendar.YEAR);
+    int hour = calendar.get(Calendar.HOUR);
+    int minute = calendar.get(Calendar.MINUTE);
 
     public ExpenseController(Context context)
     {
@@ -25,10 +31,7 @@ public class ExpenseController
 
     public double getTodaysExpenses(String username)
     {
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int year = calendar.get(Calendar.YEAR);
+
 
         return db.getExpensesByDay(username, day, month, year);
     }
@@ -40,12 +43,8 @@ public class ExpenseController
 
     public void insertTransaction(String username, String type, double amount)
     {
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int year = calendar.get(Calendar.YEAR);
-        int hour = calendar.get(Calendar.HOUR);
-        int minute = calendar.get(Calendar.MINUTE);
+
+
 
         db.insertTransaction(username, day, month, year, hour, minute, type, amount);
 

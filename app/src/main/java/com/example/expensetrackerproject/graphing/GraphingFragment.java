@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.BarData;
 
 public class GraphingFragment extends Fragment
 {
+
     private GraphingController controller;
     private String username;
     private int month;
@@ -25,6 +26,7 @@ public class GraphingFragment extends Fragment
     private static final String ARG_PARAM1 = "username";
     private static final String ARG_PARAM2 = "month";
     private static final String ARG_PARAM3 = "year";
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -48,6 +50,7 @@ public class GraphingFragment extends Fragment
             username = getArguments().getString(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
             year = getArguments().getInt(ARG_PARAM3);
+
         }
 
 
@@ -59,15 +62,16 @@ public class GraphingFragment extends Fragment
         getActivity().setTitle("Analytics");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_graphing, container, false);
-        String content = months[month-1] + " "+ year;
+        String content = months[month] + " "+ year;
         TextView top_date =  view.findViewById(R.id.date);
         top_date.setText(content);
         controller = new GraphingController(this.getActivity());
-
+        TextView total =  view.findViewById(R.id.total);
         barChart = view.findViewById(R.id.barchart);
-
+        float x = controller.MonthlyTransactionTotal(username,"expense", month+1, year);
+        total.setText("Total expenses this month: "+ String.valueOf(x));
         displayExpenses();
-//        displayIncomeVsExpenses();
+
 
         return view;
     }
@@ -89,20 +93,17 @@ public class GraphingFragment extends Fragment
         mListener = null;
     }
 
+    /***
+     * calls controller function for data
+     */
     public void displayExpenses()
     {
         BarData barData = controller.chartMonthlyTransactions(
-                username, "expense", month, year);
+                username, "expense", month+1, year);
 
         barChart.setData(barData);
+        barChart.getDescription().setText("Expenses");
     }
 
-    public void displayIncomeVsExpenses()
-    {
-        BarData barData = controller.chartIncomeVsExpense(
-                username, "expense", month, year);
 
-        barChart.setData(barData);
-
-    }
 }

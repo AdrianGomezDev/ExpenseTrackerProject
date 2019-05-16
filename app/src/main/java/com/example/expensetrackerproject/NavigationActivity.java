@@ -28,7 +28,7 @@ import com.example.expensetrackerproject.menu.PasswordFragment;
 import com.example.expensetrackerproject.menu.ProfileFragment;
 
 import java.util.Objects;
-
+import java.util.Calendar;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -36,13 +36,18 @@ public class NavigationActivity extends AppCompatActivity
 
     private MenuItem demo;
     private String username;
-
+     int month;
+     int year;
+     int day;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-
+        Calendar c = Calendar.getInstance();
+         year = c.get(Calendar.YEAR);
+         month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -138,7 +143,7 @@ public class NavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-      
+
 
         if (id == R.id.action_demo) {
             demo.setVisible(!demo.isVisible());
@@ -161,7 +166,7 @@ public class NavigationActivity extends AppCompatActivity
                 newFragment = ExpenseFragment.newInstance(username);
                 break;
             case R.id.nav_graphing:
-                newFragment = GraphingFragment.newInstance(username, 5, 2019);
+                newFragment = GraphingFragment.newInstance(username, month, year);
                 break;
             case R.id.nav_about:
 

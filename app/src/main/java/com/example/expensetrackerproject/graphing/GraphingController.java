@@ -1,7 +1,7 @@
 package com.example.expensetrackerproject.graphing;
 
 import android.content.Context;
-import android.graphics.Color;
+
 
 import com.example.expensetrackerproject.data.DBHelper;
 import com.example.expensetrackerproject.data.Transactions;
@@ -23,6 +23,12 @@ public class GraphingController
         db = new DBHelper(context);
     }
 
+    /***
+     *
+     * creates data for chart based on transactions during that month
+     * @return data
+     */
+
     public BarData chartMonthlyTransactions(String username, String type, int month, int year)
     {
         List<Transactions> transactions = db.getMonthlyTransactions(
@@ -38,26 +44,18 @@ public class GraphingController
         return data;
     }
 
-    public BarData chartIncomeVsExpense(
-            String username, String type, int month, int year)
-    {
-        float income = db.getIncome(username);
-        float expenses = db.getMonthlyTransactionTotal(username, type, month, year);
-
-        List<BarEntry> incomeBarEntries = new ArrayList<>();
-        incomeBarEntries.add(new BarEntry(1, income));
-
-        List<BarEntry> expensesBarEntries = new ArrayList<>();
-        expensesBarEntries.add(new BarEntry(1, expenses));
-
-        BarDataSet incomeDataSet = new BarDataSet(incomeBarEntries, "INCOME");
-        incomeDataSet.setColor(Color.BLUE);
-        BarDataSet expenseDataSet = new BarDataSet(expensesBarEntries, "EXPENSES");
-        expenseDataSet.setColor(Color.RED);
-
-        BarData data = new BarData(incomeDataSet, expenseDataSet);
-
-        return data;
-
+    /***
+     *
+     * @param username
+     * @param type
+     * @param month
+     * @param year
+     * @return total spent in the month
+     */
+    public float MonthlyTransactionTotal(
+            String username, String type, int month, int year){
+        return  db.getMonthlyTransactionTotal(
+                username, type,month,  year);
     }
+
 }

@@ -43,7 +43,13 @@ public class DemoFragment extends Fragment implements View.OnClickListener
     private OnFragmentInteractionListener mListener;
 
     public DemoFragment(){}
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
 
+     * @return A new instance of Demo fragment .
+     */
     public static DemoFragment newInstance(String username) {
         DemoFragment fragment = new DemoFragment();
         Bundle args = new Bundle();

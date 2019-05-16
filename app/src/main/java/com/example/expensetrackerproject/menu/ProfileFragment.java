@@ -36,9 +36,9 @@ public class ProfileFragment extends Fragment{
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment Home.
+     * @return A new instance of Profile fragment .
      */
-    // TODO: Rename and change types and number of parameters
+
     public static ProfileFragment newInstance(String username) {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
@@ -101,12 +101,6 @@ public class ProfileFragment extends Fragment{
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentMessage("Home", uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {

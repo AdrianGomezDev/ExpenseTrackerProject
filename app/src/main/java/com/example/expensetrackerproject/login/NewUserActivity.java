@@ -28,8 +28,7 @@ public class NewUserActivity extends AppCompatActivity
     private EditText createLastName;
     private EditText createEmail;
     private EditText createAge;
-    //private EditText createIncome;
-    //private EditText createSavings;
+
 
     private Button btnCancel;
     private Button btnSave;
@@ -55,8 +54,6 @@ public class NewUserActivity extends AppCompatActivity
        createLastName = (EditText)findViewById(R.id.create_lastname);
         createEmail = (EditText)findViewById(R.id.create_email);
         createAge = (EditText)findViewById(R.id.create_age);
-        //createIncome = (EditText)findViewById(R.id.create_income);
-        //createSavings = (EditText)findViewById(R.id.create_savings);
 
         //cancel button
         btnCancel = (Button)findViewById(R.id.btn_cancel);

@@ -1,7 +1,7 @@
 package com.example.expensetrackerproject.menu;
 
 import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -49,7 +49,7 @@ public class AboutFragment extends Fragment{
         TextView about_content =  aview.findViewById(R.id.About_content);
         TextView points =  aview.findViewById(R.id.points);
         String pcontent= "\n        We have an expense tracker for the day in which you have the ability to deposit or withdraw from savings amount, and creating expenses which update the amount you have left to spend for the day!" +
-                "\n\n      Our graphs will help show your daily spending trends for the month, so you can improve or keep with great habits from the month. \n";
+                "\n\n      Our graphs will help show your  spending trends for the month, so you can improve or keep with great habits from the month. \n";
         points.setText(pcontent);
         about_content.setText(content);
         return aview;

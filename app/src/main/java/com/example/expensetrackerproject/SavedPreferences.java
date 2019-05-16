@@ -15,6 +15,13 @@ public class SavedPreferences
 
     public SavedPreferences(){}
 
+    /***
+     *
+     * @param context
+     * @param username
+     * @return true or false if this is the first time accessing the app
+     */
+
     public static boolean isFirstLaunch(Context context, String username)
     {
         SharedPreferences sharedPref =
@@ -23,6 +30,11 @@ public class SavedPreferences
         return sharedPref.getBoolean(username + FIRSTLAUNCH_PARTIAL_KEY, true);
     }
 
+    /***
+     *
+     * @param context
+     * @param username
+     */
     public static void registerUser(Context context, String username)
     {
         SharedPreferences sharedPref =

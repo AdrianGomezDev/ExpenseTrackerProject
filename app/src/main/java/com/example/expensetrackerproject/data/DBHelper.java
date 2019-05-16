@@ -125,20 +125,7 @@ public class DBHelper extends SQLiteOpenHelper
         return true;
 
     }
-    /**
-     * Returns true if user exists
-     * @return
-     */
-    public boolean checkUser(String username)
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery("select * from User " +
-                        "where username= '" + username +"'",
-                null);
 
-        return res.moveToFirst();
-
-    }
 
     /**
      * Returns true if user exists
@@ -192,6 +179,7 @@ public class DBHelper extends SQLiteOpenHelper
         return spent;
     }
 
+
     /**
      * Returns list of transactions by type for month and year
      */
@@ -227,8 +215,13 @@ public class DBHelper extends SQLiteOpenHelper
 
     }
 
-    /**
-     * Returns sums of transactions by type for month and year
+    /***
+     *
+     * @param username
+     * @param type
+     * @param month
+     * @param year
+     * @return total expenses per month per year
      */
     public float getMonthlyTransactionTotal(
             String username, String type, int month, int year)
@@ -247,8 +240,10 @@ public class DBHelper extends SQLiteOpenHelper
 
     }
 
-    /**
-     * Returns user montly income
+    /***
+     *
+     * @param username
+     * @return income
      */
     public float getIncome(String username)
     {
@@ -264,8 +259,10 @@ public class DBHelper extends SQLiteOpenHelper
 
     }
 
-    /**
-     * Returns user savings
+    /***
+     *
+     * @param username
+     * @return savings
      */
     public double getSavings(String username)
     {
@@ -280,8 +277,11 @@ public class DBHelper extends SQLiteOpenHelper
         return savings;
     }
 
-    /**
-     * Updates user savings
+    /***
+     *
+     * @param username
+     * @param amount
+     * updates users amount of savings
      */
     public void updateSavings(String username, double amount)
     {
@@ -300,28 +300,7 @@ public class DBHelper extends SQLiteOpenHelper
 
     }
 
-//    public void updateAllowance(String username, double balance)
-//    {
-////        SQLiteDatabase db = this.getReadableDatabase();
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        Cursor res =  db.rawQuery("select * from User " +
-//                        "where username= '" + username + "'",
-//                null);
-//
-//        if(res.moveToFirst()){
-//            double monthlyIncome = res.getDouble(res.getColumnIndex(USER_INCOME));
-//            double yearlyIncome = monthlyIncome * 12;
-//            double adjustedIncome = yearlyIncome + balance;
-//            double allowance = adjustedIncome / 365;
-//
-//            ContentValues contentValues = new ContentValues();
-//            contentValues.put(USER_ALLOWANCE, allowance);
-//
-//            db.update(USER_TABLE_NAME, contentValues, "username=?", new String[]{username});
-//
-//        }
-//    }
+
 
     /**
      * Updates user allowance

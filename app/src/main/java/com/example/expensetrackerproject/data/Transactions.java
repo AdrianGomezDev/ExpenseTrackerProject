@@ -10,6 +10,17 @@ public class Transactions
     private String type;
     private float amount;
 
+    /***
+     *
+     * @param day
+     * @param month
+     * @param year
+     * @param hour
+     * @param minute
+     * @param type
+     * @param amount
+     * creates transaction
+     */
     public Transactions(int day, int month, int year, int hour, int minute, String type, float amount)
     {
         this.day = day;
@@ -21,73 +32,12 @@ public class Transactions
         this.amount = amount;
     }
 
-    public int getDay()
-    {
-        return day;
-    }
 
-    public void setDay(int day)
-    {
-        this.day = day;
-    }
-
-    public int getMonth()
-    {
-        return month;
-    }
-
-    public void setMonth(int month)
-    {
-        this.month = month;
-    }
-
-    public int getYear()
-    {
-        return year;
-    }
-
-    public void setYear(int year)
-    {
-        this.year = year;
-    }
-
-    public int getHour()
-    {
-        return hour;
-    }
-
-    public void setHour(int hour)
-    {
-        this.hour = hour;
-    }
-
-    public int getMinute()
-    {
-        return minute;
-    }
-
-    public void setMinute(int minute)
-    {
-        this.minute = minute;
-    }
-
-    public String getType()
-    {
-        return type;
-    }
-
-    public void setType(String type)
-    {
-        this.type = type;
-    }
 
     public float getAmount()
     {
         return amount;
     }
 
-    public void setAmount(int amount)
-    {
-        this.amount = amount;
-    }
+
 }
