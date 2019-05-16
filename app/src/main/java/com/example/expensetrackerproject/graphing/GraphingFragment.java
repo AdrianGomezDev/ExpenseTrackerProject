@@ -20,24 +20,27 @@ public class GraphingFragment extends Fragment
     private String username;
     private int month;
     private int year;
+    private int day;
     private  String months[] = {"January","February","March", "April","May","June","July","August","September","October","November","December"};
     private BarChart barChart;
 
     private static final String ARG_PARAM1 = "username";
     private static final String ARG_PARAM2 = "month";
     private static final String ARG_PARAM3 = "year";
+    private static final String ARG_PARAM4 = "day";
 
 
     private OnFragmentInteractionListener mListener;
 
     public GraphingFragment(){}
 
-    public static GraphingFragment newInstance(String username, int month, int year) {
+    public static GraphingFragment newInstance(String username, int month, int year, int day) {
         GraphingFragment fragment = new GraphingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, username);
         args.putInt(ARG_PARAM2, month);
         args.putInt(ARG_PARAM3, year);
+        args.putInt(ARG_PARAM4, day);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,6 +53,7 @@ public class GraphingFragment extends Fragment
             username = getArguments().getString(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
             year = getArguments().getInt(ARG_PARAM3);
+            day =getArguments().getInt(ARG_PARAM4);
 
         }
 
@@ -99,10 +103,10 @@ public class GraphingFragment extends Fragment
     public void displayExpenses()
     {
         BarData barData = controller.chartMonthlyTransactions(
-                username, "expense", month+1, year);
+                username, "expense", month+1, year,day);
 
         barChart.setData(barData);
-        barChart.getDescription().setText("Expenses");
+        barChart.getDescription().setText("Expenses per Day");
     }
 
 

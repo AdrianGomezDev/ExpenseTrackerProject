@@ -29,14 +29,20 @@ public class GraphingController
      * @return data
      */
 
-    public BarData chartMonthlyTransactions(String username, String type, int month, int year)
+    public BarData chartMonthlyTransactions(String username, String type, int month, int year, int day)
     {
-        List<Transactions> transactions = db.getMonthlyTransactions(
-                username, type, month, year);
+        List<Float> transactions = new ArrayList<>();
+        double x ;
+        float y ;
+       for(int i = 1; i <day+1; i++) {
+           x = db.getExpensesByDay(username, i, month, year) +0.00;
+            y = (float) x;
+           transactions.add(y);
+       }
 
         List<BarEntry> barEntries = new ArrayList<>();
         for(int i = 0; i < transactions.size(); i++) {
-            barEntries.add(new BarEntry(i, transactions.get(i).getAmount()));
+            barEntries.add(new BarEntry(i+1, transactions.get(i)));
         }
         BarDataSet dataSet = new BarDataSet(barEntries, type);
         BarData data = new BarData(dataSet);

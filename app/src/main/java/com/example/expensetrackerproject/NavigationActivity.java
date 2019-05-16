@@ -166,7 +166,7 @@ public class NavigationActivity extends AppCompatActivity
                 newFragment = ExpenseFragment.newInstance(username);
                 break;
             case R.id.nav_graphing:
-                newFragment = GraphingFragment.newInstance(username, month, year);
+                newFragment = GraphingFragment.newInstance(username, month, year, day);
                 break;
             case R.id.nav_about:
 
